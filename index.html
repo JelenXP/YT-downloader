@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <title>Přesměrování...</title>
+</head>
+<body>
+  <p>Přesměrovávám...</p>
+  <script>
+    fetch('url.txt', { cache: 'no-store' })
+      .then(res => res.text())
+      .then(url => {
+        window.location.href = url.trim();
+      })
+      .catch(() => {
+        document.body.innerHTML = "<h1>Chyba při přesměrování.</h1>";
+      });
+  </script>
+</body>
+</html>
