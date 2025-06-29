@@ -5,15 +5,29 @@
   <title>Přesměrování...</title>
 </head>
 <body>
-  <p>Přesměrovávám...</p>
+  <p id="status">Přesměrovávám...</p>
+
   <script>
+    let redirected = false;
+
     fetch("https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt", { cache: "no-store" })
       .then(res => res.text())
       .then(url => {
-        window.location.href = url.trim();
+        url = url.trim();
+        // Startujeme přesměrování
+        redirected = true;
+        window.location.href = url;
+
+        // Po 3s – kdyby to neproběhlo – zobrazíme odkaz
+        setTimeout(() => {
+          if (!redirected) {
+            document.getElementById("status").innerHTML =
+              'Failed to redirect. Continue manually: <a href="' + url + '">' + url + '</a>';
+          }
+        }, 3000);
       })
       .catch(() => {
-        document.body.innerHTML = "<h1>Chyba při přesměrování.</h1>";
+        document.body.innerHTML = "<h1>Redirect error.</h1>";
       });
   </script>
 </body>
