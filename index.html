@@ -7,7 +7,7 @@
 <body>
   <p>Redirecting...</p>
   <script>
-    fetch(https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt)
+    fetch("https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt")
       .then(res => res.text())
       .then(url => {
         window.location.href = url.trim();
