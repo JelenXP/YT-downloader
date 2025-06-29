@@ -8,13 +8,25 @@
   <p id="status">Přesměrovávám...</p>
 
   <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const debug = urlParams.get("debug") === "1";
+    
     let redirected = false;
 
-    fetch("https://raw.githubusercontent.com/JelenXP/YT-downloader", { cache: "no-store" })
+    fetch("https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt", { cache: "no-store" })
       .then(res => res.text())
       .then(url => {
         url = url.trim();
         // Startujeme přesměrování
+
+        
+              // Pokud jsme v debug režimu, nezpůsobíme přesměrování
+        if (debug) {
+          document.getElementById("status").innerHTML =
+            '🧪 Debug mód: stránka by se přesměrovala na <a href="' + url + '">' + url + '</a>';
+          return;
+        }
+
         redirected = true;
         window.location.href = url;
 
