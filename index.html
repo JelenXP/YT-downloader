@@ -2,12 +2,12 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <title>Přesměrování...</title>
+  <title>Redirecting...</title>
 </head>
 <body>
-  <p>Přesměrovávám...</p>
+  <p>Redirecting to YT Downloader...</p>
   <script>
-    fetch('url.txt', { cache: 'no-store' })
+    fetch(https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt)
       .then(res => res.text())
       .then(url => {
         window.location.href = url.trim();
