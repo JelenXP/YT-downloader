@@ -3,43 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- AdSense reklama – vlož až po schválení -->
+  <!--
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TVŮJ-KÓD"
+          crossorigin="anonymous"></script>
+  -->
+
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    #ad-block {
+      margin: 20px auto;
+      width: 100%;
+      max-width: 320px;
+      height: 100px;
+      border: 1px dashed gray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: gray;
+    }
+  </style>
 </head>
 <body>
-  <p id="status">Redirecting...</p>
+  <h1>Probíhá přesměrování…</h1>
+  <p id="status">Za pár sekund budete přesměrováni na cílovou stránku.</p>
+
+  <!-- Reklama (nebo zástupné místo pro ni) -->
+  <div id="ad-block">
+    <!-- <ins class="adsbygoogle"
+         style="display:inline-block;width:320px;height:100px"
+         data-ad-client="ca-pub-XXXXXX"
+         data-ad-slot="YYYYYY"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script> -->
+    <em>Zde může být reklama</em>
+  </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const debug = urlParams.get("debug") === "1";
-    
-    let redirected = false;
 
     fetch("https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt", { cache: "no-store" })
       .then(res => res.text())
       .then(url => {
         url = url.trim();
-        // Startujeme přesměrování
 
-        
-              // Pokud jsme v debug režimu, nezpůsobíme přesměrování
         if (debug) {
           document.getElementById("status").innerHTML =
-            '🧪 Debug mode: the page would redirect to <a href="' + url + '">' + url + '</a>';
+            '🧪 Debug mode: stránka by přesměrovala na <a href="' + url + '">' + url + '</a>';
           return;
         }
 
-        redirected = true;
-        window.location.href = url;
-
-        // Po 3s – kdyby to neproběhlo – zobrazíme odkaz
+        // Odložené přesměrování (např. po 5 sekundách)
         setTimeout(() => {
-          if (!redirected) {
-            document.getElementById("status").innerHTML =
-              'Failed to redirect. Continue manually: <a href="' + url + '">' + url + '</a>';
-          }
-        }, 3000);
+          window.location.href = url;
+        }, 5000);
+
+        // Zobrazíme i ruční odkaz pro jistotu
+        setTimeout(() => {
+          document.getElementById("status").innerHTML =
+            'Pokud nebudete přesměrováni automaticky, pokračujte zde: <a href="' + url + '">' + url + '</a>';
+        }, 6000);
       })
       .catch(() => {
-        document.body.innerHTML = "<h1>Redirect error.</h1>";
+        document.body.innerHTML = "<h1>Chyba při získávání cílové adresy.</h1>";
       });
   </script>
 </body>
