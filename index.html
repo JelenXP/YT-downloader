@@ -79,7 +79,7 @@
       messageEl.textContent = 'Click the link below to go to the destination page.';
     }
 
-    fetch('https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt', {cache: 'no-store'})
+    fetch('https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt?t='+ Date.now(), {cache: 'no-store'})
       .then(response => response.text())
       .then(url => {
         url = url.trim();
