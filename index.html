@@ -83,10 +83,10 @@
 
     if (lang.startsWith('cs')) {
       welcomeEl.textContent = 'Vítejte na mém webu!';
-      messageEl.textContent = 'Za pár sekund budete přesměrováni na cílovou stránku.';
+      messageEl.textContent = 'Klikněte na odkaz níže pro přesměrování na cílovou stránku.';
     } else {
       welcomeEl.textContent = 'Welcome to my website!';
-      messageEl.textContent = 'You will be redirected to the destination page shortly.';
+      messageEl.textContent = 'Click the link below to go to the destination page.';
     }
 
     fetch('https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt', {cache: 'no-store'})
@@ -100,17 +100,13 @@
           link.href = url;
           link.textContent = (lang.startsWith('cs')) ? 'klikněte zde' : 'click here';
           redirectInfo.textContent = (lang.startsWith('cs'))
-            ? 'Pokud nebudete automaticky přesměrováni, '
-            : 'If you are not redirected automatically, ';
+            ? 'Pro přesměrování na cílovou stránku '
+            : 'To go to the destination page, ';
           redirectInfo.appendChild(link);
           redirectInfo.appendChild(document.createTextNode('.'));
           redirectInfo.style.display = 'block';
         }, 5000);
 
-        // Po 10 sekundách automatické přesměrování
-        setTimeout(() => {
-          window.location.href = url;
-        }, 10000);
       })
       .catch(() => {
         messageEl.textContent = (lang.startsWith('cs'))
