@@ -5,6 +5,7 @@
   <title>YT downloader</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- AdSense skript -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5352646660555569"
      crossorigin="anonymous"></script>
 
@@ -35,47 +36,18 @@
     a:hover {
       text-decoration: underline;
     }
-    #ad-block {
-      margin: 2em auto;
-      width: 320px;
-      height: 100px;
-      border: 1px dashed gray;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: gray;
-      font-style: italic;
-    }
     #redirect-info {
       margin-top: 1em;
       font-weight: bold;
-      display: none; /* Skryté, zobrazí se po 5 sekundách */
+      display: none;
     }
   </style>
-
-  <!-- Google AdSense script (zakomentováno, vlož po schválení) -->
-  <!--
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX"
-    crossorigin="anonymous"></script>
-  -->
 </head>
 <body>
   <h1 id="welcome"></h1>
   <p id="message"></p>
 
-  <div id="ad-block">
-    <!--
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:320px;height:100px"
-         data-ad-client="ca-pub-XXXXXXXXXXXX"
-         data-ad-slot="YYYYYYYYYY"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-    -->
-    Zde může být reklama
-  </div>
-  <!-- bvbbcvb -->
+  <!-- Reklama -->
   <ins class="adsbygoogle"
        style="display:block"
        data-ad-client="ca-pub-5352646660555569"
@@ -85,7 +57,6 @@
   <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
-
 
   <p id="redirect-info"></p>
 
@@ -108,7 +79,6 @@
       .then(url => {
         url = url.trim();
 
-        // Po 5 sekundách zobraz ruční odkaz
         setTimeout(() => {
           const link = document.createElement('a');
           link.href = url;
@@ -120,7 +90,6 @@
           redirectInfo.appendChild(document.createTextNode('.'));
           redirectInfo.style.display = 'block';
         }, 5000);
-
       })
       .catch(() => {
         messageEl.textContent = (lang.startsWith('cs'))
@@ -128,15 +97,5 @@
           : 'Error loading destination URL.';
       });
   </script>
-<!-- bvbbcvb -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-5352646660555569"
-     data-ad-slot="3903663904"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 </body>
 </html>
