@@ -2,78 +2,120 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <title>Redirecting...</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- AdSense reklama – vlož až po schválení -->
-  <!--
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=TVŮJ-KÓD"
-          crossorigin="anonymous"></script>
-  -->
+  <title>Vítejte / Welcome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     body {
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 2em;
+      background-color: white;
+      color: black;
+      transition: background-color 0.3s, color 0.3s;
       text-align: center;
-      padding: 40px;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+        color: #ddd;
+      }
+      a {
+        color: #8ab4f8;
+      }
+    }
+    a {
+      color: blue;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
     #ad-block {
-      margin: 20px auto;
-      width: 100%;
-      max-width: 320px;
+      margin: 2em auto;
+      width: 320px;
       height: 100px;
       border: 1px dashed gray;
       display: flex;
       align-items: center;
       justify-content: center;
       color: gray;
+      font-style: italic;
+    }
+    #redirect-info {
+      margin-top: 1em;
+      font-weight: bold;
+      display: none; /* Skryté, zobrazí se po 5 sekundách */
     }
   </style>
+
+  <!-- Google AdSense script (zakomentováno, vlož po schválení) -->
+  <!--
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+  -->
 </head>
 <body>
-  <h1>Probíhá přesměrování…</h1>
-  <p id="status">Za pár sekund budete přesměrováni na cílovou stránku.</p>
+  <h1 id="welcome"></h1>
+  <p id="message"></p>
 
-  <!-- Reklama (nebo zástupné místo pro ni) -->
   <div id="ad-block">
-    <!-- <ins class="adsbygoogle"
+    <!--
+    <ins class="adsbygoogle"
          style="display:inline-block;width:320px;height:100px"
-         data-ad-client="ca-pub-XXXXXX"
-         data-ad-slot="YYYYYY"></ins>
+         data-ad-client="ca-pub-XXXXXXXXXXXX"
+         data-ad-slot="YYYYYYYYYY"></ins>
     <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script> -->
-    <em>Zde může být reklama</em>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    -->
+    Zde může být reklama
   </div>
 
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const debug = urlParams.get("debug") === "1";
+  <p id="redirect-info"></p>
 
-    fetch("https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt", { cache: "no-store" })
-      .then(res => res.text())
+  <script>
+    const lang = navigator.language || navigator.userLanguage || 'cs';
+    const welcomeEl = document.getElementById('welcome');
+    const messageEl = document.getElementById('message');
+    const redirectInfo = document.getElementById('redirect-info');
+
+    if (lang.startsWith('cs')) {
+      welcomeEl.textContent = 'Vítejte na mém webu!';
+      messageEl.textContent = 'Za pár sekund budete přesměrováni na cílovou stránku.';
+    } else {
+      welcomeEl.textContent = 'Welcome to my website!';
+      messageEl.textContent = 'You will be redirected to the destination page shortly.';
+    }
+
+    fetch('https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt', {cache: 'no-store'})
+      .then(response => response.text())
       .then(url => {
         url = url.trim();
 
-        if (debug) {
-          document.getElementById("status").innerHTML =
-            '🧪 Debug mode: stránka by přesměrovala na <a href="' + url + '">' + url + '</a>';
-          return;
-        }
-
-        // Odložené přesměrování (např. po 5 sekundách)
+        // Po 5 sekundách zobraz ruční odkaz
         setTimeout(() => {
-          window.location.href = url;
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = (lang.startsWith('cs')) ? 'klikněte zde' : 'click here';
+          redirectInfo.textContent = (lang.startsWith('cs'))
+            ? 'Pokud nebudete automaticky přesměrováni, '
+            : 'If you are not redirected automatically, ';
+          redirectInfo.appendChild(link);
+          redirectInfo.appendChild(document.createTextNode('.'));
+          redirectInfo.style.display = 'block';
         }, 5000);
 
-        // Zobrazíme i ruční odkaz pro jistotu
+        // Po 10 sekundách automatické přesměrování
         setTimeout(() => {
-          document.getElementById("status").innerHTML =
-            'Pokud nebudete přesměrováni automaticky, pokračujte zde: <a href="' + url + '">' + url + '</a>';
-        }, 6000);
+          window.location.href = url;
+        }, 10000);
       })
       .catch(() => {
-        document.body.innerHTML = "<h1>Chyba při získávání cílové adresy.</h1>";
+        messageEl.textContent = (lang.startsWith('cs'))
+          ? 'Chyba při načítání cílové adresy.'
+          : 'Error loading destination URL.';
       });
   </script>
 </body>
