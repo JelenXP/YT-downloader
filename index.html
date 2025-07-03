@@ -5,7 +5,7 @@
   <title>YT downloader</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- AdSense skript -->
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5352646660555569"
      crossorigin="anonymous"></script>
 
@@ -37,9 +37,12 @@
       text-decoration: underline;
     }
     #redirect-info {
-      margin-top: 1em;
+      margin-top: 1.5em;
       font-weight: bold;
       display: none;
+    }
+    .ad-container {
+      margin-top: 2em;
     }
   </style>
 </head>
@@ -47,18 +50,20 @@
   <h1 id="welcome"></h1>
   <p id="message"></p>
 
-  <!-- Reklama -->
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-5352646660555569"
-       data-ad-slot="3903663904"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-
   <p id="redirect-info"></p>
+
+  <!-- Reklama bude zobrazena až pod přesměrovacím odkazem -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-5352646660555569"
+         data-ad-slot="3903663904"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
   <script>
     const lang = navigator.language || navigator.userLanguage || 'cs';
