@@ -11,57 +11,62 @@
      crossorigin="anonymous"></script>
 
   <style>
+    /* -- Barvy -- */
+    :root {
+      --color-bg-light: #f9fafe;
+      --color-bg-light-alt: #fcfdfe; /* světlejší bílá */
+      --color-text-light: #222;
+      --color-text-light-alt: #333; /* tmavší černá pro text */
+      --color-white: #fff;
+
+      --color-bg-dark: #121212;
+      --color-bg-dark-alt: #1a1a1a; /* světlejší černá pro detaily */
+      --color-text-dark: #fff;
+      --color-text-dark-alt: #ddd; /* světlejší bílá pro detaily */
+    }
+
+    /* -- Globální styly -- */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9fafe;
-      color: #222;
+      background: var(--color-bg-light);
+      color: var(--color-text-light);
       margin: 0;
       padding: 0;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #121212;
-        color: #fff; /* Bílé texty */
-      }
-      a {
-        color: #66aaff;
-      }
-      #redirect-info {
-        color: #fff !important;
-      }
-      section p, section h2, #intro-texts h2, #intro-texts p {
-        color: #fff !important;
-      }
+      border-radius: 12px;
+      overflow-x: hidden;
     }
 
     a {
-      color: #0080ff;
+      color: var(--color-white); /* ve světlém režimu bílá */
       text-decoration: none;
       transition: color 0.3s;
+      border-radius: 6px;
+      padding: 0.15em 0.3em;
     }
     a:hover {
-      color: #0057b8;
-      text-decoration: underline;
+      color: var(--color-text-light-alt);
+      background-color: var(--color-bg-light-alt);
     }
 
     header {
-      background: linear-gradient(135deg, #0057b8 0%, #0080ff 100%);
-      color: white;
+      background: var(--color-white);
+      color: var(--color-text-light-alt);
       padding: 2em 1em;
       text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 0 0 12px 12px;
     }
     header h1 {
       margin: 0;
       font-weight: 700;
       font-size: 2.5rem;
       letter-spacing: 0.05em;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      text-shadow: none;
       animation: fadeInDown 1s ease forwards;
+      border-radius: 12px;
     }
 
     @keyframes fadeInDown {
@@ -80,6 +85,9 @@
       max-width: 900px;
       margin: 2em auto 3em;
       padding: 0 1em;
+      background-color: var(--color-bg-light-alt);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
     #intro-texts {
@@ -89,12 +97,14 @@
     #intro-texts h2 {
       font-size: 1.8rem;
       margin-bottom: 0.5em;
-      color: #0057b8;
+      color: var(--color-text-light-alt);
+      border-radius: 8px;
     }
     #intro-texts p {
       font-size: 1.1rem;
-      color: #444;
+      color: var(--color-text-light-alt);
       margin-top: 0;
+      border-radius: 8px;
     }
 
     #redirect-info {
@@ -102,10 +112,15 @@
       margin-top: 1.5em;
       text-align: center;
       font-size: 1.1rem;
-      color: #0057b8;
+      color: var(--color-white);
       opacity: 0;
       transform: translateY(10px);
       animation-fill-mode: forwards;
+      border-radius: 8px;
+      background-color: var(--color-text-light-alt);
+      display: inline-block;
+      padding: 0.3em 0.6em;
+      user-select: none;
     }
     #redirect-info.show {
       animation: fadeInBounce 1s ease forwards;
@@ -115,9 +130,15 @@
       font-weight: 700;
       display: inline-block;
       position: relative;
+      color: var(--color-white);
+      border-radius: 6px;
+      padding: 0.15em 0.4em;
+      background-color: var(--color-text-light-alt);
+      transition: background-color 0.3s, color 0.3s;
     }
     #redirect-info a:hover {
-      color: #0057b8;
+      color: var(--color-text-light-alt);
+      background-color: var(--color-bg-light-alt);
     }
 
     @keyframes fadeInBounce {
@@ -141,27 +162,115 @@
     .ad-container {
       text-align: center;
       margin: 3em 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
+    section {
+      background-color: var(--color-white);
+      border-radius: 12px;
+      padding: 1.5em 1.5em;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      margin-bottom: 2em;
+    }
     section h2 {
-      color: #0057b8;
-      border-bottom: 2px solid #0080ff;
+      color: var(--color-text-light-alt);
+      border-bottom: 2px solid var(--color-text-light-alt);
       padding-bottom: 0.3em;
-      margin-top: 2em;
+      margin-top: 0;
       margin-bottom: 0.6em;
+      border-radius: 6px;
     }
     section p {
       line-height: 1.6;
-      color: #333;
+      color: var(--color-text-light-alt);
+      border-radius: 6px;
     }
 
     footer {
-      background: #0057b8;
-      color: white;
+      background: var(--color-text-light-alt);
+      color: var(--color-bg-light-alt);
       text-align: center;
       padding: 1.5em 1em;
       font-size: 0.9rem;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+      border-radius: 0 0 12px 12px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+
+    /* --- TMAVÝ REŽIM --- */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: var(--color-bg-dark);
+        color: var(--color-text-dark);
+        border-radius: 12px;
+      }
+
+      a {
+        color: var(--color-bg-dark-alt); /* světlejší černá místo modré */
+      }
+      a:hover {
+        color: var(--color-text-dark);
+        background-color: var(--color-bg-dark-alt);
+      }
+
+      header {
+        background: var(--color-bg-dark-alt);
+        color: var(--color-text-dark);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.8);
+        border-radius: 0 0 12px 12px;
+      }
+      header h1 {
+        color: var(--color-text-dark);
+        text-shadow: none;
+      }
+
+      main {
+        background-color: var(--color-bg-dark-alt);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        border-radius: 12px;
+      }
+
+      #intro-texts h2,
+      #intro-texts p,
+      section h2,
+      section p {
+        color: var(--color-text-dark);
+        border-radius: 8px;
+      }
+
+      #redirect-info {
+        color: var(--color-text-dark);
+        background-color: var(--color-bg-dark-alt);
+        border-radius: 8px;
+      }
+
+      #redirect-info a {
+        color: var(--color-bg-dark-alt);
+        background-color: var(--color-text-dark);
+      }
+      #redirect-info a:hover {
+        color: var(--color-text-dark);
+        background-color: var(--color-bg-dark-alt);
+      }
+
+      .ad-container {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        border-radius: 12px;
+      }
+
+      section {
+        background-color: var(--color-bg-dark-alt);
+        box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+        border-radius: 12px;
+      }
+
+      footer {
+        background: var(--color-bg-dark-alt);
+        color: var(--color-text-dark);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+        border-radius: 0 0 12px 12px;
+      }
     }
   </style>
 </head>
@@ -177,6 +286,18 @@
     </div>
 
     <p id="redirect-info"></p>
+
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5352646660555569"
+           data-ad-slot="3903663904"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
 
     <section id="info-section">
       <h2>Jak nástroj funguje? 🎥🔊</h2>
@@ -246,7 +367,7 @@
           <h2>Why use our YT downloader? 🚀</h2>
           <p>Our tool is safe, fast, and without annoying ads. Download videos and audio directly from YouTube in high quality and enjoy offline content anytime you want. With us, you control your favorite videos and don’t have to worry about limitations.</p>
         `,
-        footerText: "© 2025 JelenXP YT downloader. All rights reserved."
+        footerText: "© 2025 YT downloader. All rights reserved."
       }
     };
 
@@ -257,29 +378,26 @@
       document.getElementById('info-section').innerHTML = texts[langKey].info;
       document.querySelector('footer p').textContent = texts[langKey].footerText;
     }
+
     applyTexts(langKey);
 
+    // Přesměrování s animací
     const redirectInfo = document.getElementById('redirect-info');
-    fetch('https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt?t='+ Date.now(), {cache: 'no-store'})
+    fetch('https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt?t=' + Date.now(), {cache: 'no-store'})
       .then(response => response.text())
       .then(url => {
         url = url.trim();
         setTimeout(() => {
-          const link = document.createElement('a');
-          link.href = url;
-          link.textContent = texts[langKey].clickHere;
-          redirectInfo.textContent = texts[langKey].redirectText;
-          redirectInfo.appendChild(link);
-          redirectInfo.appendChild(document.createTextNode('.'));
-          redirectInfo.style.display = 'block';
+          redirectInfo.innerHTML = texts[langKey].redirectText +
+            `<a href="${url}" target="_blank" rel="noopener noreferrer">${texts[langKey].clickHere}</a>.`;
           redirectInfo.classList.add('show');
-        }, 5000);
+        }, 4000);
       })
       .catch(() => {
-        redirectInfo.style.display = 'none';
-        document.getElementById('message').textContent = langKey === 'cs'
+        redirectInfo.textContent = langKey === 'cs'
           ? 'Chyba při načítání cílové adresy.'
           : 'Error loading destination URL.';
+        redirectInfo.classList.add('show');
       });
   </script>
 </body>
