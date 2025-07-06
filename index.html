@@ -12,17 +12,16 @@
 
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fafe;
+      color: #222;
       margin: 0;
       padding: 0;
-      background-color: white;
-      color: black;
-      transition: background-color 0.3s, color 0.3s;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
+
     @media (prefers-color-scheme: dark) {
       body {
         background-color: #121212;
@@ -32,63 +31,113 @@
         color: #8ab4f8;
       }
     }
+
     a {
-      color: blue;
+      color: #0080ff;
       text-decoration: none;
+      transition: color 0.3s;
     }
     a:hover {
+      color: #0057b8;
       text-decoration: underline;
     }
 
-    header, footer {
-      background-color: #0057b8;
+    header {
+      background: linear-gradient(135deg, #0057b8 0%, #0080ff 100%);
       color: white;
-      padding: 1em 0.5em;
-      text-align: center; /* centrum pro header/footer */
+      padding: 2em 1em;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
-    header h1, footer p {
+    header h1 {
       margin: 0;
+      font-weight: 700;
+      font-size: 2.5rem;
+      letter-spacing: 0.05em;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      animation: fadeInDown 1s ease forwards;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     main {
       flex: 1;
-      padding: 1em 1em 2em;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: left;
+      max-width: 900px;
+      margin: 2em auto 3em;
+      padding: 0 1em;
     }
 
-    /* Nové: centrum pro úvodní texty */
     #intro-texts {
       text-align: center;
-      margin-bottom: 2em;
+      margin-bottom: 3em;
+    }
+    #intro-texts h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5em;
+      color: #0057b8;
+    }
+    #intro-texts p {
+      font-size: 1.1rem;
+      color: #444;
+      margin-top: 0;
     }
 
     #redirect-info {
-      margin-top: 1em;
-      font-weight: bold;
-      display: none;
+      font-weight: 600;
+      margin-top: 1.5em;
       text-align: center;
+      font-size: 1.1rem;
+      color: #0057b8;
     }
+    #redirect-info a {
+      font-weight: 700;
+    }
+
     .ad-container {
-      margin: 2em 0;
       text-align: center;
+      margin: 3em 0;
     }
+
     section h2 {
       color: #0057b8;
-      margin-top: 1em;
+      border-bottom: 2px solid #0080ff;
+      padding-bottom: 0.3em;
+      margin-top: 2em;
+      margin-bottom: 0.6em;
+    }
+    section p {
+      line-height: 1.6;
+      color: #333;
+    }
+
+    footer {
+      background: #0057b8;
+      color: white;
+      text-align: center;
+      padding: 1.5em 1em;
+      font-size: 0.9rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
     }
   </style>
 </head>
 <body>
   <header>
-    <h1 id="header-title"></h1>
+    <h1 id="header-title">YT downloader - Stahujte snadno a rychle</h1>
   </header>
 
   <main>
     <div id="intro-texts">
-      <h2 id="welcome"></h2>
-      <p id="message"></p>
+      <h2 id="welcome">Děkujeme, že používáte náš YT downloader!</h2>
+      <p id="message">Klikněte na odkaz níže pro přesměrování na cílovou stránku.</p>
     </div>
 
     <p id="redirect-info"></p>
@@ -105,14 +154,28 @@
       </script>
     </div>
 
-    <section id="info-section"></section>
+    <section id="info-section">
+      <h2>Jak nástroj funguje? 🎥🔊</h2>
+      <p>Náš nástroj vám umožní snadno a rychle stahovat videa a audio z YouTube ve <strong>špičkové kvalitě</strong> bez jakýchkoliv limitů. Ať už si chcete uložit své oblíbené hudební klipy, podcasty, přednášky nebo zábavná videa – s námi to zvládnete během několika vteřin.</p>
+      <p>Stahování probíhá naprosto jednoduše: zadáte odkaz a název videa, a během chvilky máte obsah připravený ke stažení. 🎬📥</p>
+
+      <h2>FAQ (Často kladené dotazy) ❓</h2>
+      <p><strong>Je tento nástroj legální?</strong><br>Stahujte pouze obsah, ke kterému máte oprávnění. Neneseme odpovědnost za porušení autorských práv.</p>
+      <p><strong>Ukládáte osobní údaje?</strong><br>Neukládáme žádná osobní data kromě IP adresy pro detekci zneužití. Údaje se mažou po 30 dnech.</p>
+      <p><strong>Používáte cookies?</strong><br>Ano, ale pouze funkční – např. pro zapamatování jazyka nebo režimu zobrazení.</p>
+      <p><strong>Mohu sdílet tento nástroj?</strong><br>Ano, ale pouze s upozorněním na jeho zodpovědné používání.</p>
+
+      <h2>Proč používat náš YT downloader? 🚀</h2>
+      <p>Náš nástroj je bezpečný, rychlý a bez zbytečných reklam. Stahujte videa a audio přímo z YouTube ve vysoké kvalitě a užijte si obsah offline kdykoliv chcete. S námi máte kontrolu nad svými oblíbenými videi a nemusíte se bát omezení.</p>
+    </section>
   </main>
 
   <footer>
-    <p id="footer-text"></p>
+    <p>© 2025 YT downloader. Všechna práva vyhrazena.</p>
   </footer>
 
   <script>
+    // jazyková detekce a přepínání textů
     const lang = navigator.language || navigator.userLanguage || 'cs';
     const langKey = lang.startsWith('cs') ? 'cs' : 'en';
 
@@ -163,14 +226,17 @@
       }
     };
 
-    // Nastavení textů
-    document.getElementById('header-title').textContent = texts[langKey].headerTitle;
-    document.getElementById('welcome').textContent = texts[langKey].welcome;
-    document.getElementById('message').textContent = texts[langKey].message;
-    document.getElementById('info-section').innerHTML = texts[langKey].info;
-    document.getElementById('footer-text').textContent = texts[langKey].footerText;
+    // Nastavení textů na stránce podle jazyka
+    function applyTexts(langKey) {
+      document.getElementById('header-title').textContent = texts[langKey].headerTitle;
+      document.getElementById('welcome').textContent = texts[langKey].welcome;
+      document.getElementById('message').textContent = texts[langKey].message;
+      document.getElementById('info-section').innerHTML = texts[langKey].info;
+      document.querySelector('footer p').textContent = texts[langKey].footerText;
+    }
+    applyTexts(langKey);
 
-    // Přesměrování
+    // Přesměrování s odkladem a odkazem
     const redirectInfo = document.getElementById('redirect-info');
     fetch('https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt?t='+ Date.now(), {cache: 'no-store'})
       .then(response => response.text())
