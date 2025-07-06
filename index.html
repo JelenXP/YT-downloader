@@ -44,15 +44,21 @@
     .ad-container {
       margin-top: 2em;
     }
+    section {
+      max-width: 800px;
+      margin: 2em auto;
+      text-align: left;
+    }
+    h2 {
+      color: #0057b8;
+    }
   </style>
 </head>
 <body>
   <h1 id="welcome"></h1>
   <p id="message"></p>
-
   <p id="redirect-info"></p>
 
-  <!-- Reklama bude zobrazena až pod přesměrovacím odkazem -->
   <div class="ad-container">
     <ins class="adsbygoogle"
          style="display:block"
@@ -65,39 +71,77 @@
     </script>
   </div>
 
+  <section id="info-section"></section>
+
   <script>
     const lang = navigator.language || navigator.userLanguage || 'cs';
     const welcomeEl = document.getElementById('welcome');
     const messageEl = document.getElementById('message');
     const redirectInfo = document.getElementById('redirect-info');
+    const infoSection = document.getElementById('info-section');
 
-    if (lang.startsWith('cs')) {
-      welcomeEl.textContent = 'Děkujeme, že používáte náš YT downloader!';
-      messageEl.textContent = 'Klikněte na odkaz níže pro přesměrování na cílovou stránku.';
-    } else {
-      welcomeEl.textContent = 'Thank you for using our YT downloader!';
-      messageEl.textContent = 'Click the link below to go to the destination page.';
-    }
+    const content = {
+      cs: {
+        welcome: 'Děkujeme, že používáte náš YT downloader!',
+        message: 'Klikněte na odkaz níže pro přesměrování na cílovou stránku.',
+        redirectText: 'Pro přesměrování na cílovou stránku ',
+        clickHere: 'klikněte zde',
+        info: `
+          <h2>Jak náš nástroj funguje?</h2>
+          <p>Tento nástroj vám umožní rychle a jednoduše stáhnout veřejná videa z YouTube.</p>
+
+          <h2>FAQ (Často kladené dotazy)</h2>
+          <p><strong>Je tento nástroj legální?</strong><br>Stahujte pouze obsah, ke kterému máte oprávnění. Neneseme odpovědnost za porušení autorských práv.</p>
+          <p><strong>Ukládáte osobní údaje?</strong><br>Neukládáme žádná osobní data kromě IP adresy pro detekci zneužití. Údaje se mažou po 30 dnech.</p>
+          <p><strong>Používáte cookies?</strong><br>Ano, ale pouze funkční – např. pro zapamatování jazyka nebo režimu zobrazení.</p>
+          <p><strong>Mohu sdílet tento nástroj?</strong><br>Ano, ale pouze s upozorněním na jeho zodpovědné používání.</p>
+
+          <h2>Podmínky použití a soukromí</h2>
+          <p>Prohlédněte si naše <a href="#">Podmínky použití a zásady soukromí</a>. Používáním webu s nimi souhlasíte.</p>
+        `
+      },
+      en: {
+        welcome: 'Thank you for using our YT downloader!',
+        message: 'Click the link below to go to the destination page.',
+        redirectText: 'To go to the destination page, ',
+        clickHere: 'click here',
+        info: `
+          <h2>How does this tool work?</h2>
+          <p>This tool lets you quickly download publicly available YouTube videos.</p>
+
+          <h2>FAQ (Frequently Asked Questions)</h2>
+          <p><strong>Is this tool legal?</strong><br>You should only download content you are authorized to. We are not liable for any copyright violations.</p>
+          <p><strong>Do you store personal data?</strong><br>We do not store personal data except IP addresses to detect misuse. They are deleted after 30 days.</p>
+          <p><strong>Do you use cookies?</strong><br>Yes, but only functional cookies – like remembering language or display mode preferences.</p>
+          <p><strong>Can I share this tool?</strong><br>Yes, but only with a warning about responsible use.</p>
+
+          <h2>Terms of Use & Privacy Policy</h2>
+          <p>Read our <a href="#">Terms of Use and Privacy Policy</a>. By using this site, you agree to them.</p>
+        `
+      }
+    };
+
+    const langKey = lang.startsWith('cs') ? 'cs' : 'en';
+    welcomeEl.textContent = content[langKey].welcome;
+    messageEl.textContent = content[langKey].message;
+    infoSection.innerHTML = content[langKey].info;
 
     fetch('https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt?t='+ Date.now(), {cache: 'no-store'})
       .then(response => response.text())
       .then(url => {
         url = url.trim();
-
         setTimeout(() => {
           const link = document.createElement('a');
           link.href = url;
-          link.textContent = (lang.startsWith('cs')) ? 'klikněte zde' : 'click here';
-          redirectInfo.textContent = (lang.startsWith('cs'))
-            ? 'Pro přesměrování na cílovou stránku '
-            : 'To go to the destination page, ';
+          link.textContent = content[langKey].clickHere;
+          redirectInfo.textContent = content[langKey].redirectText;
           redirectInfo.appendChild(link);
           redirectInfo.appendChild(document.createTextNode('.'));
           redirectInfo.style.display = 'block';
         }, 5000);
       })
       .catch(() => {
-        messageEl.textContent = (lang.startsWith('cs'))
+        messageEl.textContent = langKey === 'cs'
           ? 'Chyba při načítání cílové adresy.'
           : 'Error loading destination URL.';
       });
