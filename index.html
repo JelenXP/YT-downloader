@@ -7,11 +7,9 @@
   <meta name="description" content="Nástroj pro snadné stahování videí a audia z YouTube ve špičkové kvalitě. FAQ a tipy, jak stáhnout bezpečně a legálně." />
 
   <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5352646660555569"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5352646660555569" crossorigin="anonymous"></script>
 
   <style>
-    /* -- Barvy -- */
     :root {
       --color-bg-light: #f9fafe;
       --color-bg-light-alt: #fcfdfe; /* světlejší bílá */
@@ -25,42 +23,50 @@
       --color-text-dark-alt: #ddd; /* světlejší bílá pro detaily */
     }
 
-    /* -- Globální styly -- */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--color-bg-light);
-      color: var(--color-text-light);
-      margin: 0 auto;            /* vystředění horizontálně */
-      padding: 0 150px;          /* prostor po stranách na desktopu pro bannery */
-      max-width: 1400px;         /* maximální šířka stránky na desktopu */
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      border-radius: 12px;
-      overflow-x: hidden;
+    /* Reset a box sizing */
+    *, *::before, *::after {
       box-sizing: border-box;
     }
 
-    main {
-      flex: 1;
+    body {
+      margin: 0;
+      background: var(--color-bg-light);
+      color: var(--color-text-light);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+    }
+
+    /* Kontejnery pro boční reklamy */
+    #left-ad, #right-ad {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 160px; /* typická šířka sidebar reklamy */
+      background: transparent; /* můžeš tam dát barvu pro ladění */
+      z-index: 10;
+    }
+    #left-ad {
+      left: 0;
+    }
+    #right-ad {
+      right: 0;
+    }
+
+    /* Hlavní obsah */
+    #content-wrapper {
       max-width: 900px;
-      margin: 2em auto 3em;
-      padding: 0 1em;
+      margin: 1.5em 170px; /* rezerva na sidebar */
       background-color: var(--color-bg-light-alt);
       border-radius: 12px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    a {
-      color: var(--color-text-light);
-      text-decoration: none;
-      transition: color 0.3s;
-      border-radius: 6px;
-      padding: 0.15em 0.3em;
-    }
-    a:hover {
-      color: var(--color-text-light-alt);
-      background-color: var(--color-bg-light-alt);
+      padding: 2em 2em 3em;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      box-sizing: border-box;
     }
 
     header {
@@ -70,26 +76,16 @@
       text-align: center;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       border-radius: 0 0 12px 12px;
+      margin-bottom: 1.5em;
     }
     header h1 {
       margin: 0;
       font-weight: 700;
       font-size: 2.5rem;
       letter-spacing: 0.05em;
-      text-shadow: none;
       animation: fadeInDown 1s ease forwards;
       border-radius: 12px;
-    }
-
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      color: var(--color-text-light-alt);
     }
 
     #intro-texts {
@@ -143,32 +139,6 @@
       background-color: var(--color-bg-light-alt);
     }
 
-    @keyframes fadeInBounce {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      60% {
-        opacity: 1;
-        transform: translateY(-10px);
-      }
-      80% {
-        transform: translateY(5px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .ad-container {
-      text-align: center;
-      margin: 3em 0;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
     section {
       background-color: var(--color-white);
       border-radius: 12px;
@@ -198,55 +168,66 @@
       font-size: 0.9rem;
       border-radius: 0 0 12px 12px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+      margin-top: auto;
     }
 
-    /* --- TMAVÝ REŽIM --- */
+    /* Animace */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInBounce {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(-10px);
+      }
+      80% {
+        transform: translateY(5px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* TMAVÝ REŽIM */
     @media (prefers-color-scheme: dark) {
       body {
         background-color: var(--color-bg-dark);
         color: var(--color-text-dark);
-        border-radius: 12px;
       }
-
-      a {
-        color: var(--color-bg-dark-alt); /* světlejší černá místo modré */
-      }
-      a:hover {
-        color: var(--color-text-dark);
+      #content-wrapper {
         background-color: var(--color-bg-dark-alt);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.8);
       }
-
       header {
         background: var(--color-bg-dark-alt);
         color: var(--color-text-dark);
         box-shadow: 0 4px 8px rgba(0,0,0,0.8);
-        border-radius: 0 0 12px 12px;
       }
       header h1 {
         color: var(--color-text-dark);
-        text-shadow: none;
       }
-
-      main {
-        background-color: var(--color-bg-dark-alt);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.8);
-        border-radius: 12px;
-      }
-
       #intro-texts h2,
       #intro-texts p,
       section h2,
       section p {
         color: var(--color-text-dark);
-        border-radius: 8px;
       }
-
       #redirect-info {
         color: var(--color-text-dark);
         background-color: var(--color-bg-dark-alt);
-        border-radius: 8px;
       }
-
       #redirect-info a {
         color: var(--color-bg-dark-alt);
         background-color: var(--color-text-dark);
@@ -255,39 +236,31 @@
         color: var(--color-text-dark);
         background-color: var(--color-bg-dark-alt);
       }
-
-      .ad-container {
-        box-shadow: 0 2px 8px rgba(0,0,0,0.8);
-        border-radius: 12px;
-      }
-
       section {
         background-color: var(--color-bg-dark-alt);
         box-shadow: 0 1px 4px rgba(0,0,0,0.6);
-        border-radius: 12px;
       }
-
       footer {
         background: var(--color-bg-dark-alt);
         color: var(--color-text-dark);
         box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-        border-radius: 0 0 12px 12px;
       }
     }
 
-    /* --- RESPONSIVITA: desktop / mobil --- */
+    /* RESPONSIVITA */
     @media (max-width: 767px) {
       body {
         padding: 0 1em;
-        max-width: 100%;
-        border-radius: 0;
       }
-      main {
+      #left-ad, #right-ad {
+        display: none;
+      }
+      #content-wrapper {
+        margin: 1.5em 0;
         max-width: 100%;
-        margin: 1.5em auto 2em;
-        padding: 0 1em;
         border-radius: 0;
         box-shadow: none;
+        padding: 1.5em 1em 2em;
       }
       header, footer {
         border-radius: 0;
@@ -296,40 +269,49 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1 id="header-title">YT downloader - Stahujte snadno a rychle</h1>
-  </header>
+  <div id="left-ad">
+    <!-- Sem můžeš později vložit AdSense kód pro levý banner -->
+  </div>
 
-  <main>
-    <div id="intro-texts">
-      <h2 id="welcome">Děkujeme, že používáte náš YT downloader!</h2>
-      <p id="message">Klikněte na odkaz níže pro přesměrování na cílovou stránku.</p>
-    </div>
+  <div id="right-ad">
+    <!-- Sem můžeš později vložit AdSense kód pro pravý banner -->
+  </div>
 
-    <p id="redirect-info"></p>
-    
-    <section id="info-section">
-      <h2>Jak nástroj funguje? 🎥🔊</h2>
-      <p>Náš nástroj vám umožní snadno a rychle stahovat videa a audio z YouTube ve <strong>špičkové kvalitě</strong> bez jakýchkoliv limitů. Ať už si chcete uložit své oblíbené hudební klipy, podcasty, přednášky nebo zábavná videa – s námi to zvládnete během několika vteřin.</p>
-      <p>Stahování probíhá naprosto jednoduše: zadáte odkaz a název videa, a během chvilky máte obsah připravený ke stažení. 🎬📥</p>
+  <div id="content-wrapper">
+    <header>
+      <h1 id="header-title">YT downloader - Stahujte snadno a rychle</h1>
+    </header>
 
-      <h2>FAQ (Často kladené dotazy) ❓</h2>
-      <p><strong>Je tento nástroj legální?</strong><br>Stahujte pouze obsah, ke kterému máte oprávnění. Neneseme odpovědnost za porušení autorských práv.</p>
-      <p><strong>Ukládáte osobní údaje?</strong><br>Neukládáme žádná osobní data kromě IP adresy pro detekci zneužití. Údaje se mažou po 30 dnech.</p>
-      <p><strong>Používáte cookies?</strong><br>Ano, ale pouze funkční – např. pro zapamatování jazyka nebo režimu zobrazení.</p>
-      <p><strong>Mohu sdílet tento nástroj?</strong><br>Ano, ale pouze s upozorněním na jeho zodpovědné používání.</p>
+    <main>
+      <div id="intro-texts">
+        <h2 id="welcome">Děkujeme, že používáte náš YT downloader!</h2>
+        <p id="message">Klikněte na odkaz níže pro přesměrování na cílovou stránku.</p>
+      </div>
 
-      <h2>Proč používat náš YT downloader? 🚀</h2>
-      <p>Náš nástroj je bezpečný, rychlý a bez zbytečných reklam. Stahujte videa a audio přímo z YouTube ve vysoké kvalitě a užijte si obsah offline kdykoliv chcete. S námi máte kontrolu nad svými oblíbenými videi a nemusíte se bát omezení.</p>
-    </section>
-  </main>
+      <p id="redirect-info"></p>
 
-  <footer>
-    <p>© 2025 YT downloader. Všechna práva vyhrazena.</p>
-  </footer>
+      <section id="info-section">
+        <h2>Jak nástroj funguje? 🎥🔊</h2>
+        <p>Náš nástroj vám umožní snadno a rychle stahovat videa a audio z YouTube ve <strong>špičkové kvalitě</strong> bez jakýchkoliv limitů. Ať už si chcete uložit své oblíbené hudební klipy, podcasty, přednášky nebo zábavná videa – s námi to zvládnete během několika vteřin.</p>
+        <p>Stahování probíhá naprosto jednoduše: zadáte odkaz a název videa, a během chvilky máte obsah připravený ke stažení. 🎬📥</p>
+
+        <h2>FAQ (Často kladené dotazy) ❓</h2>
+        <p><strong>Je tento nástroj legální?</strong><br>Stahujte pouze obsah, ke kterému máte oprávnění. Neneseme odpovědnost za porušení autorských práv.</p>
+        <p><strong>Ukládáte osobní údaje?</strong><br>Neukládáme žádná osobní data kromě IP adresy pro detekci zneužití. Údaje se mažou po 30 dnech.</p>
+        <p><strong>Používáte cookies?</strong><br>Ano, ale pouze funkční – např. pro zapamatování jazyka nebo režimu zobrazení.</p>
+        <p><strong>Mohu sdílet tento nástroj?</strong><br>Ano, ale pouze s upozorněním na jeho zodpovědné používání.</p>
+
+        <h2>Proč používat náš YT downloader? 🚀</h2>
+        <p>Náš nástroj je bezpečný, rychlý a bez zbytečných reklam. Stahujte videa a audio přímo z YouTube ve vysoké kvalitě a užijte si obsah offline kdykoliv chcete. S námi máte kontrolu nad svými oblíbenými videi a nemusíte se bát omezení.</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 YT downloader. Všechna práva vyhrazena.</p>
+    </footer>
+  </div>
 
   <script>
-    // jazyková detekce a přepínání textů
     const lang = navigator.language || navigator.userLanguage || 'cs';
     const langKey = lang.startsWith('cs') ? 'cs' : 'en';
 
