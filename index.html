@@ -25,10 +25,19 @@
     @media (prefers-color-scheme: dark) {
       body {
         background-color: #121212;
-        color: #ddd;
+        color: #eee;
       }
       a {
-        color: #8ab4f8;
+        color: #66aaff;
+      }
+      #redirect-info {
+        color: #aad8ff;
+      }
+      section p, section h2 {
+        color: #ddd;
+      }
+      #intro-texts h2 {
+        color: #88baff;
       }
     }
 
@@ -97,9 +106,39 @@
       text-align: center;
       font-size: 1.1rem;
       color: #0057b8;
+      opacity: 0;
+      transform: translateY(10px);
+      animation-fill-mode: forwards;
     }
+    #redirect-info.show {
+      animation: fadeInBounce 1s ease forwards;
+    }
+
     #redirect-info a {
       font-weight: 700;
+      display: inline-block;
+      position: relative;
+    }
+    #redirect-info a:hover {
+      color: #0057b8;
+    }
+
+    @keyframes fadeInBounce {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(-10px);
+      }
+      80% {
+        transform: translateY(5px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .ad-container {
@@ -226,7 +265,6 @@
       }
     };
 
-    // Nastavení textů na stránce podle jazyka
     function applyTexts(langKey) {
       document.getElementById('header-title').textContent = texts[langKey].headerTitle;
       document.getElementById('welcome').textContent = texts[langKey].welcome;
@@ -236,7 +274,6 @@
     }
     applyTexts(langKey);
 
-    // Přesměrování s odkladem a odkazem
     const redirectInfo = document.getElementById('redirect-info');
     fetch('https://raw.githubusercontent.com/JelenXP/YT-downloader/main/url.txt?t='+ Date.now(), {cache: 'no-store'})
       .then(response => response.text())
@@ -250,6 +287,8 @@
           redirectInfo.appendChild(link);
           redirectInfo.appendChild(document.createTextNode('.'));
           redirectInfo.style.display = 'block';
+          // Přidáme třídu pro animaci
+          redirectInfo.classList.add('show');
         }, 5000);
       })
       .catch(() => {
