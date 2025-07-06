@@ -25,19 +25,16 @@
     @media (prefers-color-scheme: dark) {
       body {
         background-color: #121212;
-        color: #eee;
+        color: #fff; /* Bílé texty */
       }
       a {
         color: #66aaff;
       }
       #redirect-info {
-        color: #aad8ff;
+        color: #fff !important;
       }
-      section p, section h2 {
-        color: #ddd;
-      }
-      #intro-texts h2 {
-        color: #88baff;
+      section p, section h2, #intro-texts h2, #intro-texts p {
+        color: #fff !important;
       }
     }
 
@@ -287,7 +284,6 @@
           redirectInfo.appendChild(link);
           redirectInfo.appendChild(document.createTextNode('.'));
           redirectInfo.style.display = 'block';
-          // Přidáme třídu pro animaci
           redirectInfo.classList.add('show');
         }, 5000);
       })
